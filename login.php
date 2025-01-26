@@ -1,3 +1,36 @@
+<?php
+session_start();
+require_once 'db.php';
+
+$error = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = mysqli_real_escape_string($conn, $_POST['username']);
+    $password = mysqli_real_escape_string($conn, $_POST['password']);
+
+    if (empty($username) || empty($password)) {
+        $error = "Both fields are required.";
+    } else {
+        $query = "SELECT * FROM users WHERE username = '$username' LIMIT 1";
+        $result = mysqli_query($conn, $query);
+        
+        if (mysqli_num_rows($result) == 1) {
+            $user = mysqli_fetch_assoc($result);
+            if (password_verify($password, $user['password'])) {
+                $_SESSION['username'] = $user['username'];
+                $_SESSION['id'] = $user['id'];
+                header("Location: dashboard.php");
+                exit();
+            } else {
+                $error = "Incorrect password.";
+            }
+        } else {
+            $error = "No account found with that username.";
+        }
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -113,6 +146,11 @@
         <div class="login-right">
             <img src="logo.png" alt="Company Logo">
             <form method="POST" action="login.php" class="w-100">
+                <?php if ($error): ?>
+                    <div class="alert alert-danger" role="alert">
+                        <?php echo $error; ?>
+                    </div>
+                <?php endif; ?>
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
                     <input type="text" class="form-control" id="username" name="username" required>

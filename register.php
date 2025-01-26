@@ -1,3 +1,48 @@
+<?php
+session_start();
+include('db.php');
+
+$errors = [];
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $confirmPassword = $_POST['confirm-password'];
+
+    if (empty($username)) {
+        $errors[] = "Username is required.";
+    } elseif (!preg_match("/^[a-zA-Z0-9]*$/", $username)) {
+        $errors[] = "Username must contain only letters and numbers.";
+    }
+
+    if (empty($email)) {
+        $errors[] = "Email is required.";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = "Please enter a valid email address.";
+    }
+
+    if (empty($password)) {
+        $errors[] = "Password is required.";
+    } elseif (!preg_match("/^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/", $password)) {
+        $errors[] = "Password must be at least 8 characters long, contain at least one uppercase letter, and one number.";
+    } elseif ($password !== $confirmPassword) {
+        $errors[] = "Passwords do not match.";
+    }
+
+    if (empty($errors)) {
+        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+        $sql = "INSERT INTO users (username, email, password) VALUES ('$username', '$email', '$passwordHash')";
+        if (mysqli_query($conn, $sql)) {
+            header('Location: login.php');
+            exit();
+        } else {
+            $errors[] = "Error: " . $sql . "<br>" . mysqli_error($conn);
+        }
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -101,6 +146,10 @@
             text-align: left;
             width: 100%;
         }
+        .error {
+            color: red;
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
@@ -109,13 +158,20 @@
         <div class="login-right">
             <img src="logo.png" alt="Company Logo">
             <form method="POST" action="register.php" class="w-100">
+                <?php if (!empty($errors)) : ?>
+                    <div class="error">
+                        <?php foreach ($errors as $error) : ?>
+                            <p><?php echo $error; ?></p>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
-                    <input type="text" class="form-control" id="username" name="username" required>
+                    <input type="text" class="form-control" id="username" name="username" value="<?php echo isset($username) ? $username : ''; ?>" required>
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" required>
+                    <input type="email" class="form-control" id="email" name="email" value="<?php echo isset($email) ? $email : ''; ?>" required>
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
