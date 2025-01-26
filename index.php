@@ -66,7 +66,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mx-auto mb-2 mb-lg-0 fs-5">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -74,7 +74,7 @@
                             Purchase
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Fishes</a></li>
+                            <li><a class="dropdown-item" href="fish.php">Fishes</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="#">Supplies</a></li>
                             <li><hr class="dropdown-divider"></li>
@@ -130,11 +130,93 @@
     </div>
 </section>
 
+<section class="py-8 bg-light text-dark">
+    <div class="container">
+        <h2 class="text-center mb-5">Our Featured Fishes</h2>
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-4 mb-4">
+                <div class="card">                  
+                    <img src="fish1.jpg" class="card-img-top" alt="Fish 1" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title mb-4">Goldfish</h5>
+                        <p class="card-text fs-9 mb-4">Goldfish are one of the most popular aquarium fish, known for their bright orange color and easy care requirements. They are perfect for beginners.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 mb-4">
+                <div class="card">                   
+                    <img src="fish2.jpg" class="card-img-top" alt="Fish 2" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title mb-4"">Betta Fish</h5>
+                        <p class="card-text fs-9 mb-4">Betta fish are known for their vibrant colors and long flowing fins. They are relatively easy to care for, but should be kept alone in tanks due to their aggressive nature.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 mb-4">
+                <div class="card">
+                    <img src="fish3.jpg" class="card-img-top" alt="Fish 3" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title mb-4"">Angelfish</h5>
+                        <p class="card-text fs-9 mb-4">Angelfish are known for their unique shape and graceful swimming. They come in various colors and thrive in well-maintained aquariums.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-8 bg-light text-dark">
+    <div class="container">
+        <h2 class="text-center mb-5">Our Featured Fishes</h2>
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-4 mb-4">
+                <div class="card">                  
+                    <img src="fish1.jpg" class="card-img-top" alt="Fish 1" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title mb-4">Goldfish</h5>
+                        <p class="card-text fs-9 mb-4">Goldfish are one of the most popular aquarium fish, known for their bright orange color and easy care requirements. They are perfect for beginners.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 mb-4">
+                <div class="card">                   
+                    <img src="fish2.jpg" class="card-img-top" alt="Fish 2" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title mb-4"">Betta Fish</h5>
+                        <p class="card-text fs-9 mb-4">Betta fish are known for their vibrant colors and long flowing fins. They are relatively easy to care for, but should be kept alone in tanks due to their aggressive nature.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 mb-4">
+                <div class="card">
+                    <img src="fish3.jpg" class="card-img-top" alt="Fish 3" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title mb-4"">Angelfish</h5>
+                        <p class="card-text fs-9 mb-4">Angelfish are known for their unique shape and graceful swimming. They come in various colors and thrive in well-maintained aquariums.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-8 bg-light text-dark">
+    <div class="container">
+        <h2 class="text-center mb-5">Our Store Location</h2>
+        <p class="text-center mb-4">Our store is located at SHRESTHA AQUARIUM-2, Nepal. Visit us for a variety of aquatic life and supplies.</p>
+        <div class="d-flex justify-content-center">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15046.644166347314!2d85.31804406324873!3d27.719146538540848!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb1917efba680d%3A0x80a0e10024b009c1!2sSHRESTHA%20AQUARIUM-2!5e0!3m2!1sen!2snp!4v1737909043297!5m2!1sen!2snp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </div>
+</section>
+
+
+
 <footer class="bg-dark text-white py-4">
   <div class="container text-center">
       <p class="comp-name">&copy; 2024 Shrestha Aquarium. All rights reserved.</p>
       <div>
-          <a href=https://www.facebook.com/Shresthaaquarium2" target="_blank" class="text-white me-3">
+          <a href="https://www.facebook.com/Shresthaaquarium2" target="_blank" class="text-white me-3">
               <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"
                    width="30">
           </a>
@@ -145,7 +227,6 @@
       </div>
   </div>
 </footer>
-
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
