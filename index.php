@@ -136,7 +136,7 @@
         <div class="row">
             <div class="col-12 col-md-6 col-lg-4 mb-4">
                 <div class="card">                  
-                    <img src="fish1.jpg" class="card-img-top" alt="Fish 1" style="height: 200px; object-fit: cover;">
+                    <img src="Home/gf.jpg" class="card-img-top" alt="Fish 1" style="height: 200px; object-fit: cover;">
                     <div class="card-body">
                         <h5 class="card-title mb-4">Goldfish</h5>
                         <p class="card-text fs-9 mb-4">Goldfish are one of the most popular aquarium fish, known for their bright orange color and easy care requirements. They are perfect for beginners.</p>
@@ -145,7 +145,7 @@
             </div>
             <div class="col-12 col-md-6 col-lg-4 mb-4">
                 <div class="card">                   
-                    <img src="fish2.jpg" class="card-img-top" alt="Fish 2" style="height: 200px; object-fit: cover;">
+                    <img src="Home/bf.jpg" class="card-img-top" alt="Fish 2" style="height: 200px; object-fit: cover;">
                     <div class="card-body">
                         <h5 class="card-title mb-4"">Betta Fish</h5>
                         <p class="card-text fs-9 mb-4">Betta fish are known for their vibrant colors and long flowing fins. They are relatively easy to care for, but should be kept alone in tanks due to their aggressive nature.</p>
@@ -154,7 +154,7 @@
             </div>
             <div class="col-12 col-md-6 col-lg-4 mb-4">
                 <div class="card">
-                    <img src="fish3.jpg" class="card-img-top" alt="Fish 3" style="height: 200px; object-fit: cover;">
+                    <img src="Home/angl.webp" class="card-img-top" alt="Fish 3" style="height: 200px; object-fit: cover;">
                     <div class="card-body">
                         <h5 class="card-title mb-4"">Angelfish</h5>
                         <p class="card-text fs-9 mb-4">Angelfish are known for their unique shape and graceful swimming. They come in various colors and thrive in well-maintained aquariums.</p>
