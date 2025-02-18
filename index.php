@@ -167,32 +167,32 @@
 
 <section class="py-8 bg-light text-dark">
     <div class="container">
-        <h2 class="text-center mb-5">Our Featured Fishes</h2>
+        <h2 class="text-center mb-5">Our Featured Supplies</h2>
         <div class="row">
             <div class="col-12 col-md-6 col-lg-4 mb-4">
                 <div class="card">                  
-                    <img src="fish1.jpg" class="card-img-top" alt="Fish 1" style="height: 200px; object-fit: cover;">
+                    <img src="Home\supplies1.jpg" class="card-img-top" alt="Fish 1" style="height: 200px; object-fit: cover;">
                     <div class="card-body">
-                        <h5 class="card-title mb-4">Goldfish</h5>
-                        <p class="card-text fs-9 mb-4">Goldfish are one of the most popular aquarium fish, known for their bright orange color and easy care requirements. They are perfect for beginners.</p>
+                        <h5 class="card-title mb-4">Optimum Fish Food</h5>
+                        <p class="card-text fs-9 mb-4">Optimum Fish Food promotes growth, immunity, and vibrant colors with essential nutrients for healthy fish.</p>
                     </div>
                 </div>
             </div>
             <div class="col-12 col-md-6 col-lg-4 mb-4">
                 <div class="card">                   
-                    <img src="fish2.jpg" class="card-img-top" alt="Fish 2" style="height: 200px; object-fit: cover;">
+                    <img src="Home\supplies2.jpeg" class="card-img-top" alt="Fish 2" style="height: 200px; object-fit: cover;">
                     <div class="card-body">
-                        <h5 class="card-title mb-4"">Betta Fish</h5>
-                        <p class="card-text fs-9 mb-4">Betta fish are known for their vibrant colors and long flowing fins. They are relatively easy to care for, but should be kept alone in tanks due to their aggressive nature.</p>
+                        <h5 class="card-title mb-4"">Takari Fish Food</h5>
+                        <p class="card-text fs-9 mb-4">Takari Fish Food is a nutrient-rich feed that supports fish growth, immunity, and vibrant colors with balanced nutrition.</p>
                     </div>
                 </div>
             </div>
             <div class="col-12 col-md-6 col-lg-4 mb-4">
                 <div class="card">
-                    <img src="fish3.jpg" class="card-img-top" alt="Fish 3" style="height: 200px; object-fit: cover;">
+                    <img src="Home\supplies3.jpeg" class="card-img-top" alt="Fish 3" style="height: 200px; object-fit: cover;">
                     <div class="card-body">
-                        <h5 class="card-title mb-4"">Angelfish</h5>
-                        <p class="card-text fs-9 mb-4">Angelfish are known for their unique shape and graceful swimming. They come in various colors and thrive in well-maintained aquariums.</p>
+                        <h5 class="card-title mb-4"">Brine Shrimp Fish Food</h5>
+                        <p class="card-text fs-9 mb-4">Brine shrimp are small, nutrient-rich crustaceans used as live or frozen fish food, enhancing growth and coloration.</p>
                     </div>
                 </div>
             </div>
