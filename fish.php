@@ -66,6 +66,11 @@ if (!$result) {
             margin-bottom: 20px;
             box-shadow: none; 
         }
+        .fish-card img {
+            width: 100%; 
+            height: 200px; 
+            object-fit: cover; 
+        }
 
         .active {
             color:rgb(255, 255, 255) !important;
@@ -130,7 +135,7 @@ if (!$result) {
                         <div class="card-body">
                             <h5 class="card-title"><?php echo $row['name']; ?></h5>
                             <p class="card-text">$<?php echo $row['price']; ?></p>
-                            <a href="login.php" class="btn btn-dark col-yel">Add to Cart</a>
+                            <a href="login.php" class="btn btn-dark">Add to Cart</a>
                         </div>
                     </div>
                 </div>
