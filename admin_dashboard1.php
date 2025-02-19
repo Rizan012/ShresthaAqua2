@@ -6,26 +6,27 @@ if (!isset($_SESSION['username']) || $_SESSION['username'] !== 'admin') {
     exit();
 }
 
-include('db.php'); // Make sure to include the database connection
+include('db.php');
 
-// Handle file upload
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $fishName = $_POST['name'];
-    $fishPrice = $_POST['price'];
+    $productName = $_POST['name'];
+    $productPrice = $_POST['price'];
 
-    $targetDir = "uploads/";
+    $targetDir = "iuploads/";
     $targetFile = $targetDir . basename($_FILES["image"]["name"]);
     $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
-    // Check if the file is a valid image
     if (getimagesize($_FILES["image"]["tmp_name"])) {
         if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
             $image = basename($_FILES["image"]["name"]);
-            $sql = "INSERT INTO fish (name, price, image) VALUES ('$fishName', '$fishPrice', '$image')";
+
+            // Use direct insertion instead of prepared statements
+            $sql = "INSERT INTO product (name, price, image) VALUES ('$productName', '$productPrice', '$image')";
+
             if (mysqli_query($conn, $sql)) {
-                echo "<script>alert('Fish added successfully');</script>";
+                echo "<script>alert('Product added successfully');</script>";
             } else {
-                echo "<script>alert('Error adding fish: " . mysqli_error($conn) . "');</script>";
+                echo "<script>alert('Error adding product: " . mysqli_error($conn) . "');</script>";
             }
         } else {
             echo "<script>alert('Sorry, there was an error uploading your file.');</script>";
@@ -35,55 +36,48 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
-// Handle fish deletion
 if (isset($_GET['delete_id'])) {
     $deleteId = $_GET['delete_id'];
 
-    // Get the fish details to delete the image only for the selected fish
-    $sql = "SELECT * FROM fish WHERE id = '$deleteId'";
+    $sql = "SELECT * FROM product WHERE id = '$deleteId'";
     $result = mysqli_query($conn, $sql);
     if ($result && mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
-        $imagePath = "uploads/" . $row['image'];
+        $imagePath = "iuploads/" . $row['image'];
 
-        // Before deleting the image, check how many fish use the same image
-        $imageCheckSql = "SELECT COUNT(*) AS count FROM fish WHERE image = '" . $row['image'] . "'";
+        $imageCheckSql = "SELECT COUNT(*) AS count FROM product WHERE image = '" . $row['image'] . "'";
         $imageCheckResult = mysqli_query($conn, $imageCheckSql);
         $imageCheckRow = mysqli_fetch_assoc($imageCheckResult);
 
-        // If the image is used by more than one fish, do not delete the image
         if ($imageCheckRow['count'] == 1) {
             if (file_exists($imagePath)) {
-                unlink($imagePath); // Delete the image from the server
+                unlink($imagePath);
             }
         }
     }
 
-    // Delete the fish record from the database
-    $deleteSql = "DELETE FROM fish WHERE id = '$deleteId'";
+    $deleteSql = "DELETE FROM product WHERE id = '$deleteId'";
     if (mysqli_query($conn, $deleteSql)) {
-        echo "<script>alert('Fish removed successfully'); window.location.href = 'admin_dashboard.php';</script>";
+        echo "<script>alert('Product removed successfully'); window.location.href = 'admin_dashboard1.php';</script>";
     } else {
-        echo "<script>alert('Error removing fish: " . mysqli_error($conn) . "');</script>";
+        echo "<script>alert('Error removing product: " . mysqli_error($conn) . "');</script>";
     }
 }
 
-// Query to fetch fish list
-$sql = "SELECT * FROM fish";
+$sql = "SELECT * FROM product";
 $result = mysqli_query($conn, $sql);
 
-// Check if the query was successful
 if (!$result) {
-    die("Query failed: " . mysqli_error($conn)); // Show detailed SQL error
+    die("Query failed: " . mysqli_error($conn));
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Admin Dashboard - Add Product</title>
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -158,10 +152,10 @@ if (!$result) {
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mx-auto mb-2 mb-lg-0 fs-5">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="admin_dashboard.php">Add Fish</a>
+                        <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'admin_dashboard.php' ? 'active' : ''; ?>" href="admin_dashboard.php">Add Fish</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="admin_dashboard1.php">Add Supplies</a>
+                        <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'admin_dashboard1.php' ? 'active' : ''; ?>" href="admin_dashboard1.php">Add Supplies</a>
                     </li>
                 </ul>
                 <div class="d-flex ms-auto align-items-center">
@@ -185,10 +179,10 @@ if (!$result) {
 
 <section class="hero-section">
     <div class="container">
-        <h2 class="mb-5 text-center">Upload Fish Information</h2>
-        <form action="admin_dashboard.php" method="POST" enctype="multipart/form-data">
+        <h2 class="mb-5 text-center">Upload Product Information</h2>
+        <form action="admin_dashboard1.php" method="POST" enctype="multipart/form-data">
             <div class="mb-3">
-                <label for="name" class="form-label">Fish Name</label>
+                <label for="name" class="form-label">Product Name</label>
                 <input type="text" class="form-control" id="name" name="name" required>
             </div>
             <div class="mb-3">
@@ -196,29 +190,28 @@ if (!$result) {
                 <input type="number" class="form-control" id="price" name="price" step="0.01" required>
             </div>
             <div class="mb-3">
-                <label for="image" class="form-label">Fish Image</label>
+                <label for="image" class="form-label">Product Image</label>
                 <input type="file" class="form-control" id="image" name="image" required>
             </div>
-            <button type="submit" class="btn btn-dark col-yel rounded-pill fs-6 fw-bold px-5 py-3 mt-3 text-dark custom-shadow">Upload Fish</button>
+            <button type="submit" class="btn btn-dark col-yel rounded-pill fs-6 fw-bold px-5 py-3 mt-3 text-dark custom-shadow">Upload Product</button>
         </form>
     </div>
 </section>
 
 <section class="mt-5">
     <div class="container">
-        <h2 class="mb-5 text-center">Fish List</h2>
+        <h2 class="mb-5 text-center">Product List</h2>
         <div class="row">
             <?php
-            // Display fish items
             while ($row = mysqli_fetch_assoc($result)):
             ?>
                 <div class="col-md-4 mb-4">
                     <div class="card shadow">
-                        <img src="uploads/<?php echo $row['image']; ?>" class="card-img-top" alt="Fish Image">
+                        <img src="iuploads/<?php echo $row['image']; ?>" class="card-img-top" alt="Product Image">
                         <div class="card-body">
                             <h5 class="card-title"><?php echo $row['name']; ?></h5>
                             <p class="card-text">Price: $<?php echo number_format($row['price'], 2); ?></p>
-                            <a href="admin_dashboard.php?delete_id=<?php echo $row['id']; ?>" class="btn btn-danger">Remove</a>
+                            <a href="admin_dashboard1.php?delete_id=<?php echo $row['id']; ?>" class="btn btn-danger">Remove</a>
                         </div>
                     </div>
                 </div>

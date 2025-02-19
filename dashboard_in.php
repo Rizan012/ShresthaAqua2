@@ -84,11 +84,9 @@ if (!isset($_SESSION['username'])) {
                             Purchase
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Fishes</a></li>
+                            <li><a class="dropdown-item" href="fish_in.php">Fishes</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Supplies</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Decorations</a></li>
+                            <li><a class="dropdown-item" href="product_in.php">Supplies</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -96,7 +94,7 @@ if (!isset($_SESSION['username'])) {
                     </li>
                 </ul>
                 <div class="d-flex ms-auto align-items-center">
-                    <a href="#" class="btn btn-dark me-3 position-relative col-yel rounded-pill custom-shadow">
+                    <a href="cart.php" class="btn btn-dark me-3 position-relative col-yel rounded-pill custom-shadow">
                         <img src="icons/cart.svg" alt="Cart" width="28" height="28">
                     </a>
                     <?php if (isset($_SESSION['username'])): ?>
@@ -125,7 +123,7 @@ if (!isset($_SESSION['username'])) {
                     Explore our wide range of premium fishes, decor, and essential supplies to create the perfect aquatic environment.
                 </h1>
                 <p class="fst-italic text-yel">Bringing the beauty of the ocean to your home.....</p>
-                <a class="btn btn-dark col-yel rounded-pill fs-6 fw-bold px-5 py-3 mt-3 text-dark custom-shadow" href="#">Buy Now</a>
+                <a class="btn btn-dark col-yel rounded-pill fs-6 fw-bold px-5 py-3 mt-3 text-dark custom-shadow" href="fish_in.php">Buy Now</a>
             </div>
             <div class="col-12 col-lg-6">
                 <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
@@ -150,6 +148,101 @@ if (!isset($_SESSION['username'])) {
         </div>
     </div>
 </section>
+
+<section class="py-8 bg-light text-dark">
+    <div class="container">
+        <h2 class="text-center mb-5">Our Featured Fishes</h2>
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-4 mb-4">
+                <a href="fish_in.php" class="text-decoration-none">
+                    <div class="card">                  
+                        <img src="Home/gf.jpg" class="card-img-top" alt="Fish 1" style="height: 200px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title mb-4">Goldfish</h5>
+                            <p class="card-text fs-9 mb-4">Goldfish are one of the most popular aquarium fish, known for their bright orange color and easy care requirements. They are perfect for beginners.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 mb-4">
+                <a href="fish_in.php" class="text-decoration-none">
+                    <div class="card">                   
+                        <img src="Home/bf.jpg" class="card-img-top" alt="Fish 2" style="height: 200px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title mb-4">Betta Fish</h5>
+                            <p class="card-text fs-9 mb-4">Betta fish are known for their vibrant colors and long flowing fins. They are relatively easy to care for, but should be kept alone in tanks due to their aggressive nature.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 mb-4">
+                <a href="fish_in.php" class="text-decoration-none">
+                    <div class="card">
+                        <img src="Home/angl.webp" class="card-img-top" alt="Fish 3" style="height: 200px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title mb-4">Angelfish</h5>
+                            <p class="card-text fs-9 mb-4">Angelfish are known for their unique shape and graceful swimming. They come in various colors and thrive in well-maintained aquariums.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-8 bg-light text-dark">
+    <div class="container">
+        <h2 class="text-center mb-5">Our Featured Supplies</h2>
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-4 mb-4">
+                <a href="product_in.php" class="text-decoration-none">
+                    <div class="card">                  
+                        <img src="Home/supplies1.jpg" class="card-img-top" alt="Product 1" style="height: 200px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title mb-4">Optimum Fish Food</h5>
+                            <p class="card-text fs-9 mb-4">Optimum Fish Food promotes growth, immunity, and vibrant colors with essential nutrients for healthy fish.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 mb-4">
+                <a href="product_in.php" class="text-decoration-none">
+                    <div class="card">                   
+                        <img src="Home/supplies2.jpeg" class="card-img-top" alt="Product 2" style="height: 200px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title mb-4">Takari Fish Food</h5>
+                            <p class="card-text fs-9 mb-4">Takari Fish Food is a nutrient-rich feed that supports fish growth, immunity, and vibrant colors with balanced nutrition.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 mb-4">
+                <a href="product_in.php" class="text-decoration-none">
+                    <div class="card">
+                        <img src="Home/supplies3.jpeg" class="card-img-top" alt="Product 3" style="height: 200px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title mb-4">Brine Shrimp Fish Food</h5>
+                            <p class="card-text fs-9 mb-4">Brine shrimp are small, nutrient-rich crustaceans used as live or frozen fish food, enhancing growth and coloration.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="py-8 bg-light text-dark">
+    <div class="container">
+        <h2 class="text-center mb-5">Our Store Location</h2>
+        <p class="text-center mb-4">Our store is located at SHRESTHA AQUARIUM-2, Nepal. Visit us for a variety of aquatic life and supplies.</p>
+        <div class="d-flex justify-content-center">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15046.644166347314!2d85.31804406324873!3d27.719146538540848!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb1917efba680d%3A0x80a0e10024b009c1!2sSHRESTHA%20AQUARIUM-2!5e0!3m2!1sen!2snp!4v1737909043297!5m2!1sen!2snp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </div>
+</section>
+
+
 
 <footer class="bg-dark text-white py-4">
   <div class="container text-center">

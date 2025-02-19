@@ -1,10 +1,15 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['username'])) {
+    header('Location: login.php');
+    exit();
+}
 
 include('db.php');
 
 $sql = "SELECT * FROM fish";
 $result = mysqli_query($conn, $sql);
-
 
 if (!$result) {
     die("Query failed: " . mysqli_error($conn)); 
@@ -88,17 +93,17 @@ if (!$result) {
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mx-auto mb-2 mb-lg-0 fs-5">
                     <li class="nav-item">
-                        <a class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'index.php') ? 'active' : ''; ?>" aria-current="page" href="index.php">Home</a>
+                        <a class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'dashboard_in.php') ? 'active' : ''; ?>" aria-current="page" href="dashboard_in.php">Home</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle <?php echo (basename($_SERVER['PHP_SELF']) == 'fish.php') ? 'active' : ''; ?>" href="#" role="button" data-bs-toggle="dropdown"
+                        <a class="nav-link dropdown-toggle <?php echo (basename($_SERVER['PHP_SELF']) == 'fish_in.php') ? 'active' : ''; ?>" href="#" role="button" data-bs-toggle="dropdown"
                            aria-expanded="false">
                             Purchase
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="fish.php">Fishes</a></li>
+                            <li><a class="dropdown-item" href="fish_in.php">Fishes</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="product.php">Supplies</a></li>
+                            <li><a class="dropdown-item" href="product_in.php">Supplies</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -106,10 +111,21 @@ if (!$result) {
                     </li>
                 </ul>
                 <div class="d-flex ms-auto align-items-center">
-                    <a href="login.php" class="btn btn-dark me-3 position-relative col-yel rounded-pill custom-shadow">
+                    <a href="cart.php" class="btn btn-dark me-3 position-relative col-yel rounded-pill custom-shadow">
                         <img src="icons/cart.svg" alt="Cart" width="28" height="28">
                     </a>
-                    <a href="login.php" class="btn btn-dark col-yel rounded-pill fs-6 fw-bold text-dark px-4 py-2 custom-shadow">Login</a>
+                    <?php if (isset($_SESSION['username'])): ?>
+                        <div class="dropdown">
+                            <button class="btn btn-dark col-yel rounded-pill fs-6 fw-bold text-dark px-4 py-2 custom-shadow dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                <?php echo $_SESSION['username']; ?>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+                            </ul>
+                        </div>
+                    <?php else: ?>
+                        <a class="btn btn-dark col-yel rounded-pill fs-6 fw-bold text-dark px-4 py-2 custom-shadow" href="login.php">Login</a>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
@@ -120,7 +136,6 @@ if (!$result) {
     <h2 class="text-center mb-5 fw-7">Fishes for purchase:</h2>
     <div class="row">
         <?php
-        
         if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_assoc($result)) {
                 ?>
@@ -130,7 +145,7 @@ if (!$result) {
                         <div class="card-body">
                             <h5 class="card-title"><?php echo $row['name']; ?></h5>
                             <p class="card-text">$<?php echo $row['price']; ?></p>
-                            <a href="login.php" class="btn btn-dark col-yel">Add to Cart</a>
+                            <a href="cart.php?add_to_cart=<?php echo $row['id']; ?>" class="btn btn-dark col-yel">Add to Cart</a>
                         </div>
                     </div>
                 </div>

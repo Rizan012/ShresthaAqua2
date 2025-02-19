@@ -2,9 +2,8 @@
 
 include('db.php');
 
-$sql = "SELECT * FROM fish";
+$sql = "SELECT * FROM product"; 
 $result = mysqli_query($conn, $sql);
-
 
 if (!$result) {
     die("Query failed: " . mysqli_error($conn)); 
@@ -16,7 +15,7 @@ if (!$result) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fishes | Shrestha Aquarium</title>
+    <title>Products | Shrestha Aquarium</title>
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -62,7 +61,7 @@ if (!$result) {
             margin-top: auto;
         }
 
-        .fish-card {
+        .product-card {
             margin-bottom: 20px;
             box-shadow: none; 
         }
@@ -91,7 +90,7 @@ if (!$result) {
                         <a class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'index.php') ? 'active' : ''; ?>" aria-current="page" href="index.php">Home</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle <?php echo (basename($_SERVER['PHP_SELF']) == 'fish.php') ? 'active' : ''; ?>" href="#" role="button" data-bs-toggle="dropdown"
+                        <a class="nav-link dropdown-toggle <?php echo (basename($_SERVER['PHP_SELF']) == 'product.php') ? 'active' : ''; ?>" href="#" role="button" data-bs-toggle="dropdown"
                            aria-expanded="false">
                             Purchase
                         </a>
@@ -117,7 +116,7 @@ if (!$result) {
 </header>
 
 <main class="container py-8">
-    <h2 class="text-center mb-5 fw-7">Fishes for purchase:</h2>
+    <h2 class="text-center mb-5 fw-7">Products for purchase:</h2>
     <div class="row">
         <?php
         
@@ -125,8 +124,8 @@ if (!$result) {
             while ($row = mysqli_fetch_assoc($result)) {
                 ?>
                 <div class="col-md-4">
-                    <div class="card fish-card">
-                        <img src="uploads/<?php echo $row['image']; ?>" class="card-img-top" alt="Fish Image">
+                    <div class="card product-card">
+                        <img src="iuploads/<?php echo $row['image']; ?>" class="card-img-top" alt="Product Image">
                         <div class="card-body">
                             <h5 class="card-title"><?php echo $row['name']; ?></h5>
                             <p class="card-text">$<?php echo $row['price']; ?></p>
@@ -137,7 +136,7 @@ if (!$result) {
                 <?php
             }
         } else {
-            echo "<p class='text-center'>No fish found.</p>";
+            echo "<p class='text-center'>No products found.</p>";
         }
         ?>
     </div>

@@ -11,20 +11,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($username) || empty($password)) {
         $error = "Both fields are required.";
     } else {
+        // Check for admin credentials
         if ($username === "admin" && $password === "Admin1234") {
             $_SESSION['username'] = "admin";
             header("Location: admin_dashboard.php");
             exit();
         } else {
+            // Check the user credentials from the database
             $query = "SELECT * FROM users WHERE username = '$username' LIMIT 1";
             $result = mysqli_query($conn, $query);
 
             if (mysqli_num_rows($result) == 1) {
                 $user = mysqli_fetch_assoc($result);
+
+                // Verify the password
                 if (password_verify($password, $user['password'])) {
                     $_SESSION['username'] = $user['username'];
-                    $_SESSION['id'] = $user['id'];
-                    header("Location: dashboard.php");
+                    $_SESSION['user_id'] = $user['id']; // Store the user_id
+                    header("Location: dashboard_in.php");
                     exit();
                 } else {
                     $error = "Incorrect password.";
