@@ -1,20 +1,20 @@
-<?php
+<?php 
 session_start();
 include('db.php');
 
-// Redirect to login if the user is not logged in
+
 if (!isset($_SESSION['username'])) {
     header('Location: login.php');
     exit();
 }
 
-// Get user details (assuming the user is logged in)
+
 $user_id = $_SESSION['user_id'];
 $query = "SELECT * FROM users WHERE id = '$user_id'";
 $result = mysqli_query($conn, $query);
 $user = mysqli_fetch_assoc($result);
 
-// Calculate the total price
+
 $total = 0;
 foreach ($_SESSION['cart'] as $item) {
     $total += $item['price'] * $item['quantity'];
@@ -29,14 +29,42 @@ foreach ($_SESSION['cart'] as $item) {
     <title>Checkout | Shrestha Aquarium</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Uniqca&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: Poppins, sans-serif;
+            background-color: #f8f9fa;
+        }
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        h2, h4 {
+            color: #333;
+        }
+        table th, table td {
+            text-align: center;
+        }
+        .btn-dark {
+            background-color: #343a40;
+            border-color: #343a40;
+        }
+        .btn-dark:hover {
+            background-color: #23272b;
+        }
+        .form-group label {
+            font-weight: 600;
+        }
+    </style>
 </head>
-<body style="font-family: Poppins;">
+<body>
     <div class="container mt-5">
-        <h2>Checkout</h2>
+        <h2 class="mb-4">Checkout</h2>
         <form action="process_order.php" method="POST">
             <h4>Your Order Summary</h4>
-            <table class="table table-striped">
-                <thead>
+            <table class="table table-striped mb-4">
+                <thead class="thead-dark">
                     <tr>
                         <th>Product</th>
                         <th>Price</th>
@@ -46,7 +74,7 @@ foreach ($_SESSION['cart'] as $item) {
                 </thead>
                 <tbody>
                     <?php
-                    // Fetch cart items from session
+                    
                     foreach ($_SESSION['cart'] as $item) {
                         $item_total = $item['price'] * $item['quantity'];
                         echo "<tr>";
@@ -73,12 +101,8 @@ foreach ($_SESSION['cart'] as $item) {
                 <label for="address">Shipping Address</label>
                 <input type="text" class="form-control" id="address" name="address" required>
             </div>
-            
-
-            <button type="submit" class="btn btn-primary">Confirm Order</button>
+            <button type="submit" class="btn btn-dark btn-lg btn-block">Confirm Order</button>
         </form>
-
-        
     </div>
 </body>
 </html>

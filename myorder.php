@@ -2,16 +2,15 @@
 session_start();
 include('db.php');
 
-// Redirect to login if the user is not logged in
+
 if (!isset($_SESSION['username'])) {
     header('Location: login.php');
     exit();
 }
 
-// Get user details (assuming the user is logged in)
 $user_id = $_SESSION['user_id'];
 
-// Fetch user orders from the database
+
 $query = "SELECT * FROM orders WHERE user_id = '$user_id' ORDER BY created_at DESC";
 $result = mysqli_query($conn, $query);
 

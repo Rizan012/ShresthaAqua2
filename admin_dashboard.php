@@ -6,9 +6,9 @@ if (!isset($_SESSION['username']) || $_SESSION['username'] !== 'admin') {
     exit();
 }
 
-include('db.php'); // Make sure to include the database connection
+include('db.php'); 
 
-// Handle file upload
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $fishName = $_POST['name'];
     $fishPrice = $_POST['price'];
@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $targetFile = $targetDir . basename($_FILES["image"]["name"]);
     $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
-    // Check if the file is a valid image
+    
     if (getimagesize($_FILES["image"]["tmp_name"])) {
         if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
             $image = basename($_FILES["image"]["name"]);
@@ -35,31 +35,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
-// Handle fish deletion
+
 if (isset($_GET['delete_id'])) {
     $deleteId = $_GET['delete_id'];
 
-    // Get the fish details to delete the image only for the selected fish
+    
     $sql = "SELECT * FROM fish WHERE id = '$deleteId'";
     $result = mysqli_query($conn, $sql);
     if ($result && mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
         $imagePath = "uploads/" . $row['image'];
 
-        // Before deleting the image, check how many fish use the same image
+        
         $imageCheckSql = "SELECT COUNT(*) AS count FROM fish WHERE image = '" . $row['image'] . "'";
         $imageCheckResult = mysqli_query($conn, $imageCheckSql);
         $imageCheckRow = mysqli_fetch_assoc($imageCheckResult);
 
-        // If the image is used by more than one fish, do not delete the image
+        
         if ($imageCheckRow['count'] == 1) {
             if (file_exists($imagePath)) {
-                unlink($imagePath); // Delete the image from the server
+                unlink($imagePath); 
             }
         }
     }
 
-    // Delete the fish record from the database
+    
     $deleteSql = "DELETE FROM fish WHERE id = '$deleteId'";
     if (mysqli_query($conn, $deleteSql)) {
         echo "<script>alert('Fish removed successfully'); window.location.href = 'admin_dashboard.php';</script>";
@@ -68,13 +68,13 @@ if (isset($_GET['delete_id'])) {
     }
 }
 
-// Query to fetch fish list
+
 $sql = "SELECT * FROM fish";
 $result = mysqli_query($conn, $sql);
 
-// Check if the query was successful
+
 if (!$result) {
-    die("Query failed: " . mysqli_error($conn)); // Show detailed SQL error
+    die("Query failed: " . mysqli_error($conn)); 
 }
 ?>
 
@@ -209,7 +209,7 @@ if (!$result) {
         <h2 class="mb-5 text-center">Fish List</h2>
         <div class="row">
             <?php
-            // Display fish items
+            
             while ($row = mysqli_fetch_assoc($result)):
             ?>
                 <div class="col-md-4 mb-4">
