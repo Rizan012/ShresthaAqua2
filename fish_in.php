@@ -14,6 +14,38 @@ $result = mysqli_query($conn, $sql);
 if (!$result) {
     die("Query failed: " . mysqli_error($conn)); 
 }
+
+// Handle Add to Cart
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_to_cart'])) {
+    $fish_id = $_POST['fish_id'];
+    $quantity = 1; // Default quantity is 1
+
+    if (!isset($_SESSION['cart'])) {
+        $_SESSION['cart'] = [];
+    }
+
+    // Check if the fish is already in the cart
+    if (isset($_SESSION['cart'][$fish_id])) {
+        $_SESSION['cart'][$fish_id]['quantity'] += 1;
+    } else {
+        // Fetch fish details
+        $fish_query = "SELECT * FROM fish WHERE id = '$fish_id'";
+        $fish_result = mysqli_query($conn, $fish_query);
+        $fish = mysqli_fetch_assoc($fish_result);
+
+        $_SESSION['cart'][$fish_id] = [
+            'id' => $fish['id'],
+            'name' => $fish['name'],
+            'price' => $fish['price'],
+            'image' => $fish['image'],
+            'quantity' => $quantity,
+            'is_fish' => true 
+        ];
+        
+    }
+    header("Location: fish_in.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -125,11 +157,13 @@ if (!$result) {
                                 <?php echo $_SESSION['username']; ?>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <li><a class="dropdown-item" href="myorder.php">My Orders</a></li>
                                 <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                             </ul>
                         </div>
                     <?php else: ?>
-                        <a class="btn btn-dark col-yel rounded-pill fs-6 fw-bold text-dark px-4 py-2 custom-shadow" href="login.php">Login</a>
+                        <a href="login.php" class="btn btn-dark">Login</a>
+                        <a href="register.php" class="btn btn-dark">Register</a>
                     <?php endif; ?>
                 </div>
             </div>
@@ -150,7 +184,10 @@ if (!$result) {
                         <div class="card-body">
                             <h5 class="card-title"><?php echo $row['name']; ?></h5>
                             <p class="card-text">$<?php echo $row['price']; ?></p>
-                            <a href="" class="btn btn-dark ">Add to Cart</a>
+                            <form method="post">
+                                <input type="hidden" name="fish_id" value="<?php echo $row['id']; ?>">
+                                <button type="submit" name="add_to_cart" class="btn btn-dark">Add to Cart</button>
+                            </form>
                         </div>
                     </div>
                 </div>

@@ -103,11 +103,13 @@ if (!isset($_SESSION['username'])) {
                                 <?php echo $_SESSION['username']; ?>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <li><a class="dropdown-item" href="myorder.php">My Orders</a></li>
                                 <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                             </ul>
                         </div>
                     <?php else: ?>
-                        <a class="btn btn-dark col-yel rounded-pill fs-6 fw-bold text-dark px-4 py-2 custom-shadow" href="login.php">Login</a>
+                        <a href="login.php" class="btn btn-dark">Login</a>
+                        <a href="register.php" class="btn btn-dark">Register</a>
                     <?php endif; ?>
                 </div>
             </div>
